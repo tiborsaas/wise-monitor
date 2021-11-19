@@ -28,5 +28,5 @@ Launch the websocket server locally
 
 ## Todo
 
-[ ] monitor events from webhooks
-[ ] setup communication between background.js and popup.js
+ - [ ] monitor events from webhooks
+ - [ ] setup communication between background.js and popup.js
