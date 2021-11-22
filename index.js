@@ -25,7 +25,7 @@ WS.on('connection', function connection(conn) {
 app.post('/listen', (req, res) => {
   console.log(req.body);
   if (app.ws) {
-    app.ws.conn.send(req.body);
+    app.ws.conn.send(JSON.stringify(req.body));
   }
   res.json({});
 });
