@@ -1,3 +1,5 @@
+const actions = [];
+
 function initServerConnection(port) {
   // const url = "ws://35.203.156.49:8080";
   const url = "ws://127.0.0.1:5000";
@@ -6,11 +8,32 @@ function initServerConnection(port) {
   socket.onmessage = function (event) {
     if (event.data) {
       const payload = JSON.parse(event.data);
-      chrome.browserAction.setBadgeText({text: payload.data })
-      console.log('websocket', payload);
+      const { data, sent_at, event_type } = payload;
+      // chrome.browserAction.setBadgeText({text: data });
+      console.log(payload)
 
-      if (payload.action === 'transfer') {
-        console.log('transfer event');
+      if (event_type === 'transfers#state-change') {
+        actions.push({
+          type: 'state_change',
+          message: data.current_state,
+          sent_at,
+        })
+      }
+
+      if (event_type === 'transfers#active-cases') {
+        actions.push({
+          type: 'transfer_issue',
+          message: data.active_cases,
+          sent_at,
+        })
+      }
+
+      if (event_type === 'balances#credit') {
+        actions.push({
+          type: data.resource.type,
+          message: data.post_transaction_balance_amount,
+          sent_at,
+        })
       }
     }
   };
@@ -24,11 +47,10 @@ function initServerConnection(port) {
   };
 }
 
-chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
-  console.log(msg);
-  if (msg.foo === 'bar') {
-    sendResponse("ACID");
-    return true;
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message === 'get-actions') {
+    sendResponse(actions);
   }
 });
 
