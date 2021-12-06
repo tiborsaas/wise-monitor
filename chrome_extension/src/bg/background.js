@@ -1,4 +1,4 @@
-const actions = [];
+const actions = [123];
 
 function initServerConnection(port) {
   // const url = "ws://35.203.156.49:8080";
@@ -10,7 +10,10 @@ function initServerConnection(port) {
       const payload = JSON.parse(event.data);
       const { data, sent_at, event_type } = payload;
       // chrome.browserAction.setBadgeText({text: data });
-      console.log(payload)
+      console.log(payload);
+      console.log(actions);
+
+      actions.push(payload)
 
       if (event_type === 'transfers#state-change') {
         actions.push({
