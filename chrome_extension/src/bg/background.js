@@ -1,48 +1,47 @@
-const actions = [123];
+const actions = [];
+
+function createActionEntry(payload) {
+  const { data, sent_at, event_type } = payload;
+
+  const eventMap = {
+    "transfers#state-change": {
+      type: "state_change",
+      key: "current_state",
+    },
+    "transfers#active-cases": {
+      type: "transfer_issue",
+      key: "active_cases",
+    },
+    "balances#credit": {
+      type: "transfer_received",
+      key: "post_transaction_balance_amount",
+    },
+  }
+
+  return {
+    type: data[eventMap[event_type]].type,
+    message: data[eventMap[event_type]].key,
+    sent_at,
+  }
+}
 
 function initServerConnection(port) {
-  // const url = "ws://35.203.156.49:8080";
   const url = "ws://127.0.0.1:5000";
   socket = new WebSocket(url);
 
   socket.onmessage = function (event) {
     if (event.data) {
-      const payload = JSON.parse(event.data);
-      const { data, sent_at, event_type } = payload;
-      // chrome.browserAction.setBadgeText({text: data });
+      const { payload } = JSON.parse(event);
+      chrome.browserAction.setBadgeText({text: data });
       console.log(payload);
       console.log(actions);
 
-      actions.push(payload)
-
-      if (event_type === 'transfers#state-change') {
-        actions.push({
-          type: 'state_change',
-          message: data.current_state,
-          sent_at,
-        })
-      }
-
-      if (event_type === 'transfers#active-cases') {
-        actions.push({
-          type: 'transfer_issue',
-          message: data.active_cases,
-          sent_at,
-        })
-      }
-
-      if (event_type === 'balances#credit') {
-        actions.push({
-          type: data.resource.type,
-          message: data.post_transaction_balance_amount,
-          sent_at,
-        })
-      }
+      actions.push(createActionEntry(payload));
     }
   };
 
   socket.onclose = function (event) {
-    chrome.browserAction.setBadgeText({text: "X" })
+    chrome.browserAction.setBadgeText({text: "-" })
   };
 
   socket.onerror = function (error) {
