@@ -12,14 +12,8 @@ const WS = new WebSocket.Server({ server });
 
 WS.on('connection', function connection(conn) {
     console.log('connected');
-    app.ws = {
-      conn
-    };
-    conn.send(JSON.stringify({
-      data: {
-        event_type: 'connection'
-      }
-    }));
+    app.ws = { conn };
+    conn.send(JSON.stringify({ event_type: 'connection' }));
 });
 
 app.post('/listen', (req, res) => {
