@@ -4,27 +4,12 @@ We are building a chrome extension and a small websocket server to monitor event
 
 [Full presentation](https://docs.google.com/presentation/d/16oNrvdEO3Yiwrhk7u9n7Cw4aqF0bNxZj8yMkuRfdpr8/edit?usp=sharing)
 
-## Setup
+## Where is the code?
 
-### Step 1
+This repo is organized into 4 sections, each into its own branch:
 
-Use Ngrok for development: https://ngrok.com/
-
-In the command line create a tunnel to expose localhost:
-
-```
-ngrok http 5000
-```
-
-### Step 2
-
-Load the chrome extension
-
-### Step 3
-
-Create the webhook in your Wise.com account
-
-### Step 4
-
-Launch the websocket server locally
+ - [Section 1](https://github.com/tiborsaas/wise-monitor/tree/section-1)
+ - [Section 2](https://github.com/tiborsaas/wise-monitor/tree/section-2)
+ - [Section 3](https://github.com/tiborsaas/wise-monitor/tree/section-3)
+ - [Section 4](https://github.com/tiborsaas/wise-monitor/tree/section-4)
 
