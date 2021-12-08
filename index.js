@@ -14,12 +14,7 @@ WS.on('connection', function connection(conn) {
     console.log('connected');
 
     app.ws = { conn }; // save context to app object
-
-    conn.send(JSON.stringify({
-      data: {
-        event_type: 'connection'
-      }
-    }));
+    conn.send(JSON.stringify({event_type: 'connection'}));
 });
 
 app.post('/listen', (req, res) => {
