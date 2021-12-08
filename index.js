@@ -13,11 +13,7 @@ const WS = new WebSocket.Server({ server });
 WS.on('connection', function connection(conn) {
     console.log('connected');
 
-    conn.send(JSON.stringify({
-      data: {
-        event_type: 'connection'
-      }
-    }));
+    conn.send(JSON.stringify({ event_type: 'connection' }));
 });
 
 console.table({
