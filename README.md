@@ -2,6 +2,8 @@
 
 We are building a chrome extension and a small websocket server to monitor events created by webhooks on Wise.com
 
+[Full presentation](https://docs.google.com/presentation/d/16oNrvdEO3Yiwrhk7u9n7Cw4aqF0bNxZj8yMkuRfdpr8/edit?usp=sharing)
+
 ## Setup
 
 ### Step 1
@@ -26,7 +28,3 @@ Create the webhook in your Wise.com account
 
 Launch the websocket server locally
 
-## Todo
-
- - [ ] monitor events from webhooks
- - [ ] setup communication between background.js and popup.js
