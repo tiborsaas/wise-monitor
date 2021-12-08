@@ -12,17 +12,38 @@ h1 {
 #actions {
     list-style-type: none;
     margin: 0;
+    padding: 0;
+    padding-bottom: 1rem;
 }
 
-#actions.state_change {
+#actions li {
+    padding: 1rem;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+#actions li span {
+    display: block;
+    margin-top: 5px;
+}
+
+#actions li .badge {
+    display: inline-block;
+    background: white;
+    padding: 2px;
+    margin-right: 4px;
+    border-radius: 3px;
+}
+
+.state_change {
     background: lightgoldenrodyellow;
 }
 
-#actions.transfer_issue {
+.transfer_issue {
     background: tomato;
 }
 
-#actions.transfer_received {
+.transfer_received {
     background: lightgreen;
 }
 
